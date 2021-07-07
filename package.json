@@ -1,0 +1,23 @@
+{
+  "name": "figma-plugin-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tom Quinonero <tomquinonero@hey.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "rollup": "^2.52.7",
+    "rollup-plugin-html-bundle": "^0.0.3",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sirv-cli": "^1.0.12",
+    "svelte-preprocess": "^4.7.3"
+  }
+}
