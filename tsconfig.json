@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "target": "esnext",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   },
   "include": ["./src"]
 }

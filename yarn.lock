@@ -23,6 +23,11 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
+"@figma/plugin-typings@^1.26.0":
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.26.0.tgz#2a0ef53919ac226f0a7fe7dbbde404a2c8b797b5"
+  integrity sha512-afX0lhkV6EWQ4UGGIl+C/298KOZx/fRNCMx/DHEOYweM1gwonwizi0SuloT0C+A8mvbWeQ9eKqpJGD5ftIHeqw==
+
 "@polka/url@^1.0.0-next.15":
   version "1.0.0-next.15"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.15.tgz#6a9d143f7f4f49db2d782f9e1c8839a29b43ae23"

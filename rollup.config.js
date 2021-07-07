@@ -87,9 +87,9 @@ export default [
   // The part that communicate with Figma directly
   // Communicate with main.js via event send/binding
   {
-    input: "src/code.js",
+    input: "src/code.ts",
     output: {
-      file: "public/code.ts",
+      file: "public/code.js",
       format: "iife",
       name: "code",
     },
