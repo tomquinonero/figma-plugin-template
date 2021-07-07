@@ -1,22 +1,24 @@
-import resolve from "@rollup/plugin-node-resolve"
-import commonjs from "@rollup/plugin-commonjs"
-import livereload from "rollup-plugin-livereload"
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import livereload from "rollup-plugin-livereload";
 
 // Svelte related
-import svelte from "rollup-plugin-svelte"
-import autoPreprocess from "svelte-preprocess"
-
+import svelte from "rollup-plugin-svelte";
+import autoPreprocess from "svelte-preprocess";
 
 // Minifier
-import { terser } from "rollup-plugin-terser"
+import { terser } from "rollup-plugin-terser";
 
 // Post CSS
-import postcss from "rollup-plugin-postcss"
+import postcss from "rollup-plugin-postcss";
 
 // Inline to single html
-import htmlBundle from "rollup-plugin-html-bundle"
+import htmlBundle from "rollup-plugin-html-bundle";
 
-const production = !process.env.ROLLUP_WATCH
+// Typescript
+import typescript from "rollup-plugin-typescript";
+
+const production = !process.env.ROLLUP_WATCH;
 
 export default [
   // MAIN.JS
@@ -30,21 +32,20 @@ export default [
       file: "public/bundle.js",
     },
     plugins: [
-
       // Svelte plugin
       svelte({
         // enable run-time checks when not in production
         dev: !production,
         preprocess: autoPreprocess(),
         onwarn: (warning, handler) => {
-          const { code, frame } = warning
-          if (code === "css-unused-selector" && frame.includes("shape")) return
+          const { code, frame } = warning;
+          if (code === "css-unused-selector" && frame.includes("shape")) return;
 
-          handler(warning)
+          handler(warning);
         },
       }),
 
-      // Handle external dependencies and prepare 
+      // Handle external dependencies and prepare
       // the terrain for svelte later on
       resolve({
         browser: true,
@@ -53,6 +54,9 @@ export default [
         extensions: [".svelte", ".mjs", ".js", ".json", ".node", ".ts"],
       }),
       commonjs({ transformMixedEsModules: true }),
+
+      // Typescript
+      typescript({ sourceMap: !production }),
 
       // Post CSS config
       postcss({
@@ -71,7 +75,7 @@ export default [
       !production && serve(),
       !production && livereload("public"),
 
-      // If prod mode, we minify 
+      // If prod mode, we minify
       production && terser(),
     ],
     watch: {
@@ -85,31 +89,32 @@ export default [
   {
     input: "src/code.js",
     output: {
-      file: "public/code.js",
+      file: "public/code.ts",
       format: "iife",
       name: "code",
     },
     plugins: [
+      typescript(),
       resolve(),
       commonjs({ transformMixedEsModules: true }),
       production && terser(),
     ],
   },
-]
+];
 
 function serve() {
-  let started = false
+  let started = false;
 
   return {
     writeBundle() {
       if (!started) {
-        started = true
+        started = true;
 
         require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
           stdio: ["ignore", "inherit", "inherit"],
           shell: true,
-        })
+        });
       }
     },
-  }
+  };
 }
