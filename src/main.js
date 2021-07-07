@@ -1,1 +1,7 @@
-console.log("main");
+import App from "./Main";
+
+const app = new App({
+  target: document.body,
+});
+
+export default app;

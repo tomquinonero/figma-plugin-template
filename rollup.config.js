@@ -2,6 +2,11 @@ import resolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
 import livereload from "rollup-plugin-livereload"
 
+// Svelte related
+import svelte from "rollup-plugin-svelte"
+import autoPreprocess from "svelte-preprocess"
+
+
 // Minifier
 import { terser } from "rollup-plugin-terser"
 
@@ -25,6 +30,19 @@ export default [
       file: "public/bundle.js",
     },
     plugins: [
+
+      // Svelte plugin
+      svelte({
+        // enable run-time checks when not in production
+        dev: !production,
+        preprocess: autoPreprocess(),
+        onwarn: (warning, handler) => {
+          const { code, frame } = warning
+          if (code === "css-unused-selector" && frame.includes("shape")) return
+
+          handler(warning)
+        },
+      }),
 
       // Handle external dependencies and prepare 
       // the terrain for svelte later on
