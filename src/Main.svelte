@@ -1,8 +1,6 @@
 <script lang="ts">
   import './main.scss';
 
-  let test: string = "test"
-
   const handleClick = () => {
     parent.postMessage(
       {
@@ -14,7 +12,6 @@
     )
   }
 </script>
-{test}
 <button on:click={handleClick}>Create a Shape</button>
 
 <style lang="scss">
