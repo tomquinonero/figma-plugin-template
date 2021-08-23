@@ -10,8 +10,9 @@ export const splitText = async (text: TextNode, splitType: string)=>{
   if(splitType == "word"){
     texts.push(...text.characters.split(' '))
   }
-
-  console.log(texts);
+  if(splitType == "letter"){
+    texts.push(...text.characters.split(''))
+  }
   
   const emptyText = text.clone()
   emptyText.deleteCharacters(0,emptyText.characters.length)
