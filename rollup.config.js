@@ -1,10 +1,8 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 
-
 // Minifier
 import { terser } from "rollup-plugin-terser";
-
 
 // Typescript
 import typescript from "rollup-plugin-typescript";

@@ -1,3 +1,5 @@
+import { splitText } from "./shared"
+
 figma.parameters.on('input', (parameters: ParameterValues, currentKey: string, result: SuggestionResults) => {
   const currentValue = parameters[currentKey]
   switch (currentKey) {
@@ -10,9 +12,20 @@ figma.parameters.on('input', (parameters: ParameterValues, currentKey: string, r
   }
 })
 
-figma.on('run', (event: RunEvent) => {
+figma.on('run', async (event: RunEvent) => {
   if (event.parameters) {
-    console.log(event.parameters);
+    const selection = figma.currentPage.selection[0]
+    const {type} = event.parameters
+    
+    if(selection && selection.type == "TEXT"){
+
+      await splitText(selection, type)
+      
+    }else{
+      figma.notify("You need to select a text layer")
+    }
     
   }
+
+  figma.closePlugin()
 })
