@@ -1,7 +1,14 @@
 {
-  "name": "Figma Svelte Template",
+  "name": "Text Splitter",
   "id": "",
   "api": "1.0.0",
   "main": "public/code.js",
-  "ui": "public/index.html"
+  "parameterOnly": true,
+  "parameters": [
+    {
+      "name": "Split text by...",
+      "key": "type",
+      "allowFreeform": false
+    }
+  ]
 }
