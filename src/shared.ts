@@ -1,36 +1,36 @@
-export const splitText = async (text: TextNode, splitType: string)=>{
+export const splitText = async (text: TextNode, splitType: string) => {
   const font = text.fontName as FontName
   await figma.loadFontAsync(font)
-  
+
   const texts = []
 
-  if(splitType == "Word"){
-    texts.push(...text.characters.split(' '))
+  if (splitType == "word") {
+    texts.push(...text.characters.split(" "))
   }
-  if(splitType == "Letter"){
-    texts.push(...text.characters.split(''))
+  if (splitType == "letter") {
+    texts.push(...text.characters.split(""))
   }
-  
+
   const emptyText = text.clone()
-  emptyText.deleteCharacters(0,emptyText.characters.length)
+  emptyText.deleteCharacters(0, emptyText.characters.length)
   emptyText.textAutoResize = "WIDTH_AND_HEIGHT"
-  
+
   // compute width of a spacew
   const space = emptyText.clone()
-  space.insertCharacters(0, 'i')
+  space.insertCharacters(0, "i")
   const gap = space.width
   space.remove()
-  
-  const baseX = text.x + text.width + (text.width*0.1)
+
+  const baseX = text.x + text.width + text.width * 0.1
   let offsetX = baseX
   let offsetY = text.y
   const maxWidth = text.width
-  
-  const nodes = texts.map((chars,index)=>{
-    const text: TextNode = emptyText.clone()
-    text.insertCharacters(0,chars)
 
-    if(offsetX + text.width >= baseX + maxWidth){
+  const nodes = texts.map((chars, index) => {
+    const text: TextNode = emptyText.clone()
+    text.insertCharacters(0, chars)
+
+    if (offsetX + text.width >= baseX + maxWidth) {
       offsetX = baseX
       offsetY += text.height
     }
