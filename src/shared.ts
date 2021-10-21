@@ -4,6 +4,8 @@ export const splitText = async (text: TextNode, splitType: string) => {
 
   const texts = []
 
+  const parentNode = text.parent
+
   if (splitType == "word") {
     texts.push(...text.characters.split(" "))
   }
@@ -26,6 +28,8 @@ export const splitText = async (text: TextNode, splitType: string) => {
   let offsetY = text.y
   const maxWidth = text.width
 
+  console.log({ offsetY })
+
   const nodes = texts.map((chars, index) => {
     const text: TextNode = emptyText.clone()
     text.insertCharacters(0, chars)
@@ -33,15 +37,25 @@ export const splitText = async (text: TextNode, splitType: string) => {
     if (offsetX + text.width >= baseX + maxWidth) {
       offsetX = baseX
       offsetY += text.height
+      console.log({ offsetY })
     }
     text.x = offsetX
     text.y = offsetY
+    console.log({ offsetY })
     text.name = `${index} - ${text.characters}`
     offsetX += text.width + gap
     return text
   })
 
+  console.log(text)
+  console.log(text.relativeTransform)
+  console.log(text.x)
+  console.log({ offsetY })
+  console.log(text.y)
+
   const group = figma.group(nodes, figma.currentPage)
+
+  parentNode.appendChild(group)
   group.name = "Splitted text"
   group.expanded = false
 
