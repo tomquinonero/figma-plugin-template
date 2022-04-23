@@ -1,13 +1,16 @@
 export const splitText = async (text: TextNode, splitType: string)=>{
+  console.log(text);
+  console.log(splitType);
+
   const font = text.fontName as FontName
   await figma.loadFontAsync(font)
   
   const texts = []
 
-  if(splitType == "Word"){
+  if(splitType == "word"){
     texts.push(...text.characters.split(' '))
   }
-  if(splitType == "Letter"){
+  if(splitType == "letter"){
     texts.push(...text.characters.split(''))
   }
   
@@ -46,4 +49,6 @@ export const splitText = async (text: TextNode, splitType: string)=>{
   group.expanded = false
 
   emptyText.remove()
+  // text.remove()
+
 }

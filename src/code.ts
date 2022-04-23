@@ -4,7 +4,7 @@ figma.parameters.on('input', (parameters: ParameterValues, currentKey: string, r
   const currentValue = parameters[currentKey]
   switch (currentKey) {
     case 'type':
-      const types = ['Word', 'Letter']
+      const types = ['word', 'letter']
       result.setSuggestions(types.filter(s => s.includes(currentValue)))
       break
     default:
