@@ -4,7 +4,6 @@
   "api": "1.0.0",
   "main": "public/code.js",
   "parameterOnly": true,
-  "editorType": ["figma"],
   "parameters": [
     {
       "name": "Split text by...",
